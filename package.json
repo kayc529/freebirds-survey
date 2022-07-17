@@ -1,0 +1,29 @@
+{
+  "name": "freebirds-survey",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "^12.18.3",
+    "npm": "^6.0.0"
+  },
+  "author": "Yuna Jung, Kay Yan Cheung",
+  "license": "ISC",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "bootstrap": "^4.5.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.4",
+    "ejs": "^2.6.1",
+    "express": "^4.18.1",
+    "http-errors": "^2.0.0",
+    "jquery": "^3.6.0",
+    "mongoose": "^6.4.4",
+    "morgan": "^1.10.0",
+    "popper.js": "^1.16.1"
+  }
+}

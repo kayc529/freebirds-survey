@@ -13,6 +13,7 @@ The **main** branch consists of production codes, which means *it should only co
 
 ### Switching to another branch
 `git checkout <branch-name>`
+
 *You cannot switch branch unless all the modifications are committed. If you want to force switch branch, use `git checkout <branch-name> -f`*
 
 ### Check which branch you are currently in and see the list of existing branches
@@ -33,6 +34,7 @@ Before pushing your codes, make sure your branch contains the most updated codes
 1. Add all modifications to stage `git add .`
 2. Commit with message `git commit -m '<your message>'`
 3. Push codes to repo `git push origin -u <branch-name>`
+
 *Please note that you MUST NOT push codes to the **main** branch. Pull request must be created if you want to merge your branch into the **main** branch*
 
 ## Pull Request

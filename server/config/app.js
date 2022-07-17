@@ -8,6 +8,7 @@ let cors = require('cors');
 
 //import routers
 let indexRouter = require('../routes/index');
+let surveyRouter = require('../routes/survey');
 
 // database setup
 let mongoose = require('mongoose');
@@ -25,8 +26,8 @@ let app = express();
 // view engine setup
 app.set('views', path.join(__dirname, '../views'));
 app.set('view engine', 'ejs'); // express  -e
-app.use(logger('dev'));
 app.use(express.json());
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, '../../node_modules')));
 
 //routing
 app.use('/', indexRouter);
+app.use('/survey', surveyRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

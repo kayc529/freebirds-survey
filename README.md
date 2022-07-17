@@ -36,6 +36,7 @@ Before pushing your codes, make sure your branch contains the most updated codes
 1. Add all modifications to stage `git add .`
 2. Commit with message `git commit -m '<your message>'`
 3. Push codes to repo `git push origin -u <branch-name>`
+
 *Please note that you MUST NOT push codes to the **main** branch. Pull request must be created if you want to merge your branch into the **main** branch*
 
 ## Pull Request

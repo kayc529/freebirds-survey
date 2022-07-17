@@ -15,8 +15,12 @@ The **main** branch consists of production codes, which means *it should only co
 `git checkout <branch-name>`
 *You cannot switch branch unless all the modifications are committed. If you want to force switch branch, use `git checkout <branch-name> -f`*
 
+### Check which branch you are currently in and see the list of existing branches
+`git branch`
+
 ### Pulling codes from remote
-Before pushing your codes, make sure your branch contains the most updated codes from the **main** branch. You can do this by `git pull main` to merge the codes from remote main into your current local branch.
+Before pushing your codes, make sure your branch contains the most updated codes from the **main** branch. You can do this by `git fetch` to get the latest codes from the remote **main** branch and `git merge main` to merge those codes into your current local branch (Or simply `git pull` if you branch is on Github already).
+
 ### Pushing codes to Github (remote)
 1. Add all modifications to stage `git add .`
 2. Commit with message `git commit -m '<your message>'`

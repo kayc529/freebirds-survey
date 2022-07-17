@@ -15,13 +15,15 @@ const displayAddSurvey = (req, res, next) => {
 };
 
 const processAddSurvey = (req, res, next) => {
+  const { title, description, questions } = req.body;
+  console.log('title', title);
+  console.log('description', description);
+  console.log('questions', questions);
+
   let newSurvey = Survey({
-    title: req.body.title,
-    description: req.body.description,
-    questions: {
-      question: req.body.question,
-      questionType: req.body.questionType,
-    },
+    title: title,
+    description: description,
+    questions: questions,
   });
 
   Survey.create(newSurvey, (err, Book) => {

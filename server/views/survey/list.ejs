@@ -10,7 +10,7 @@
     <p>Survey List</p>
     <!-- Show a list of surveys here -->
     <% for(let count=0; count < surveys.length; count++){ %>
-        <p><%= surveys[count].title %></p>
+        <a href="/survey/edit/<%= surveys[count]._id %>"><%= surveys[count].title %></a>
     <% } %>
 </body>
 </html>

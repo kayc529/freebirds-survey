@@ -18,8 +18,16 @@ The **main** branch consists of production codes, which means *it should only co
 ### Check which branch you are currently in and see the list of existing branches
 `git branch`
 
-### Pulling codes from remote
-Before pushing your codes, make sure your branch contains the most updated codes from the **main** branch. You can do this by `git fetch` to get the latest codes from the remote **main** branch and `git merge main` to merge those codes into your current local branch (Or simply `git pull` if you branch is on Github already).
+### Pulling and merging codes from remote main into local branch
+Before pushing your codes, make sure your branch contains the most updated codes from the **main** branch (since someone may have merged their codes into the main branch while you are working on your own branch).
+1. Make sure all the changes in your working branch is commited
+2. Switch to your local main branch `git checkout main`
+3. Pull the latest codes from the remote **main** branch `git pull` 
+4. Switch back to your branch `git checkout <branch-name>`
+5. Merge the codes from your local main branch into your branch `git merge main`
+6. Resolve any conflicts
+7. Commit again (if neccessary)
+7. Push your codes to your remote branch `git push -u origin <branch-name>`
 
 ### Pushing codes to Github (remote)
 1. Add all modifications to stage `git add .`
@@ -27,10 +35,7 @@ Before pushing your codes, make sure your branch contains the most updated codes
 3. Push codes to repo `git push origin -u <branch-name>`
 *Please note that you MUST NOT push codes to the **main** branch. Pull request must be created if you want to merge your branch into the **main** branch*
 
-
-
 ## Pull Request
-
 ### Creating Pull Request
 Before merging your codes into the **main** branch, you must create a pull request to let other team members look at your codes.
 

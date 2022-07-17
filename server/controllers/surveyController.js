@@ -11,7 +11,7 @@ const displaySurveyList = (req, res, next) => {
 };
 
 const displayAddSurvey = (req, res, next) => {
-  res.render('survey/add');
+  res.render('survey/add', { title: 'Add New Survey' });
 };
 
 const processAddSurvey = (req, res, next) => {
@@ -37,4 +37,52 @@ const processAddSurvey = (req, res, next) => {
   });
 };
 
-module.exports = { displaySurveyList, displayAddSurvey, processAddSurvey };
+const displayEditSurvey = (req, res, next) => {
+  const surveyId = req.params.id;
+  Survey.findById({ _id: surveyId }, (err, surveyToEdit) => {
+    if (err) {
+      console.log(err);
+      return res.end(err);
+    }
+
+    res.render('survey/edit', {
+      title: 'Edit Survey',
+      survey: surveyToEdit,
+    });
+  });
+};
+
+const processEditSurvey = (req, res, next) => {
+  const surveyToUpdate = req.body;
+  console.log(surveyToUpdate);
+  Survey.updateOne({ _id: surveyToUpdate._id }, surveyToUpdate, (err) => {
+    if (err) {
+      console.log(err);
+      return res.end(err);
+    } else {
+      res.status(200).json({ success: true });
+    }
+  });
+};
+
+const processDeleteSurvey = (req, res, next) => {
+  let surveyId = req.params.id;
+  Survey.remove({ _id: surveyId }, (err) => {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      // refresh the survey list
+      res.redirect('/survey');
+    }
+  });
+};
+
+module.exports = {
+  displaySurveyList,
+  displayAddSurvey,
+  processAddSurvey,
+  displayEditSurvey,
+  processEditSurvey,
+  processDeleteSurvey,
+};

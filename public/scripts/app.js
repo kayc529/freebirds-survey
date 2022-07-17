@@ -55,6 +55,8 @@ function addQuestion() {
   newSurveyForm.appendChild(questionContainer);
 }
 
+const createSurveyDataFromInput = () => {};
+
 const addNewSurvey = () => {
   const title = document.getElementById('title')?.value || '';
 
@@ -108,3 +110,60 @@ const addNewSurvey = () => {
       alert('Something went wrong, failed to create survey!');
     });
 };
+
+function updateSurvey() {
+  const title = document.getElementById('title')?.value || '';
+
+  //check if the title is blank
+  if (!title) {
+    alert('Please enter a title');
+    return;
+  }
+
+  const description = document.getElementById('description')?.value || '';
+  const questionInputs = document.getElementsByClassName('question');
+  const typeSelects = document.getElementsByClassName('type');
+  let questions = [];
+
+  //check if any question is blank
+  //loop to create an array of question object
+  for (let i = 0; i < questionInputs.length; i++) {
+    let question = questionInputs[i].value;
+    if (!question) {
+      alert('You cannot leave a question blank!');
+      return;
+    }
+    questions.push({ question });
+  }
+
+  //loop to add questionType to each question object
+  for (let i = 0; i < typeSelects.length; i++) {
+    questions[i] = { ...questions[i], questionType: typeSelects[i].value };
+  }
+
+  //get surveyId from URL
+  const surveyId = document.URL.substring(document.URL.lastIndexOf('/') + 1);
+  const data = { _id: surveyId, title, description, questions };
+  const url = `/survey/edit/${surveyId}`;
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  //post to server
+  //return to list when survey is updated
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((data) => {
+      window.location.href = '/survey';
+      alert('Survey updated!');
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('Something went wrong, failed to create survey!');
+    });
+}

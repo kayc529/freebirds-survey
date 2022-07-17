@@ -5,8 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="/scripts/app.js"></script>
 </head>
 <body>
-    <p>edit survey page</p>
+    <form id="new-survey-form">
+        <h1><%= title%></h1>
+        <!-- Survey Title -->
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id='title'value='<%= survey.title %>'/>
+        </div>
+        <!-- Survey Description -->
+        <div>
+            <label for="description">Description</label>
+            <input type="description" id='description' value='<%= survey.description %>'/>
+        </div>
+        <!-- loop to show questions -->
+        <% for(let i=0; i<survey.questions.length; i++){%>
+        <div>
+            <label for="description">Question</label>
+            <input type="text" class='question' value='<%= survey.questions[i].question%>'/>
+            <label>Question Type</label>
+            <!-- Change the default selected according to the data in DB -->
+            <select class="type">
+                <% if(survey.questions[i].questionType === 'TEXT') { %> 
+                    <option value="TEXT" selected>Text</option>
+                <% } else { %>
+                    <option value="TEXT">Text</option>
+                <% }%>
+                <% if(survey.questions[i].questionType === 'T_F') { %> 
+                    <option value="T_F" selected>True or False</option>
+                <% } else { %>
+                    <option value="T_F">True or False</option>
+                <% }%>
+                <% if(survey.questions[i].questionType === 'OPTIONS') { %> 
+                    <option value="OPTIONS" selected>Options</option>
+                <% } else { %>
+                    <option value="OPTIONS">Options</option>
+                <% }%>
+                <% if(survey.questions[i].questionType === 'CHECKBOX') { %> 
+                    <option value="CHECKBOX" selected>Checkbox</option>
+                <% } else { %>
+                    <option value="CHECKBOX">Checkbox</option>
+                <% }%>
+            </select>
+        </div>
+        <% } %>
+    </form>
+    <!-- Buttons -->
+    <button id="add-question-btn" onclick="addQuestion()">Add a question</button>
+    <button id="add-question-btn" onclick="updateSurvey()">Update</button>
 </body>
 </html>

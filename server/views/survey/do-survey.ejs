@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/scripts/app.js"></script>
+</head>
+<body>
+    <form id="new-survey-form">
+        <!-- Survey Title -->
+        <h2><%= survey.title%></h2>
+        <!-- Survey Description -->
+        <h3><%= survey.description%></h3>
+        <!-- Loop survey questions and show the corresponding question type -->
+        <% for(let i=0; i<survey.questions.length; i++){ %>
+        <div>
+            <p><%= survey.questions[i].question %></p>
+            <% switch (survey.questions[i].questionType) {
+            case 'TEXT': %>
+                <input type="text" class="<%= survey.questions[i].questionType%> <%= i%>" />
+            <% break;
+            case 'T_F': %>
+                <input type="radio" name="t_f" value="True" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>True</label><br>
+                <input type="radio" name="t_f" value="False" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>False</label><br>  
+            <% break;
+            case 'OPTIONS': %>
+                <input type="radio" name="options" value="Positive" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Positive</label><br>
+                <input type="radio" name="options" value="Neutral" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Neutral</label><br>
+                <input type="radio" name="options" value="Negative" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Negative</label><br>
+            <% break;
+            case 'CHECKBOX': %>
+                <input type="checkbox" name="checkbox" value="Twitter" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Twitter</label><br>
+                <input type="checkbox" name="checkbox" value="Facebook" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Facebook</label><br>
+                <input type="checkbox" name="checkbox" value="Instagram" class="<%= survey.questions[i].questionType%> <%= i%>">
+                <label>Instagram</label><br>
+            <% break;
+            default:
+                break; } %>
+        </div>
+        <%}%>
+    </form>
+    <!-- Buttons -->
+    <button id="add-question-btn" onclick="submitSurveyResponse()">Submit</button>
+</body>
+</html>

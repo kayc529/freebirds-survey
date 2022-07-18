@@ -6,7 +6,7 @@ const displaySurveyList = (req, res, next) => {
       return console.error(err);
     }
 
-    res.render('survey/list', { surveys });
+    res.render('survey/list', { title: 'Survey', surveys });
   });
 };
 

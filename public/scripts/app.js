@@ -7,9 +7,10 @@
   window.addEventListener('load', Start);
 })();
 
+//Add a question to the survey
 function addQuestion() {
   //get the form element
-  const newSurveyForm = document.getElementById('new-survey-form');
+  let newSurveyForm = document.getElementById('new-survey-form');
   //create a div container
   let questionContainer = document.createElement('div');
 
@@ -55,8 +56,7 @@ function addQuestion() {
   newSurveyForm.appendChild(questionContainer);
 }
 
-const createSurveyDataFromInput = () => {};
-
+//post new survey data to the server
 const addNewSurvey = () => {
   const title = document.getElementById('title')?.value || '';
 
@@ -111,6 +111,7 @@ const addNewSurvey = () => {
     });
 };
 
+//post updated survey data to the server
 function updateSurvey() {
   const title = document.getElementById('title')?.value || '';
 

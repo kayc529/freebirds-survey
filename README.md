@@ -8,6 +8,8 @@ After you clone the project to your computer, run `npm install` to ensure all pa
 
 The **main** branch consists of production codes, which means *it should only contain codes that 100% work*. Please ensure your codes are well tested before merging codes into the **main** branch.
 
+You should also run `npm install` after you switch branches.
+
 ### Create a new branch *locally*
 `git branch <new-branch-name>`
 

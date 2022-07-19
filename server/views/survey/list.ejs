@@ -1,16 +1,6 @@
 <%- include('../partials/header.ejs'); -%>
 
 <%- include('../partials/main_nav.ejs'); -%>
-  
-<!--
-    <p>Survey List</p>
-
-    <% for(let count=0; count < surveys.length; count++){ %>
-        <a href="/survey/edit/<%= surveys[count]._id %>"><%= surveys[count].title %></a>
-    <% } %> 
--->
-
-
     <div class="margin container">
         <div class="row justify-content-md-center">
             <div class="col-md-auto">
@@ -21,12 +11,16 @@
             <th>Description</th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         <% for (let count=0; count < surveys.length; count++) { %>
             <tr>
-                <td><%= surveys[count].title %></td>
+                <td><a href="/survey/do-survey/<%= surveys[count]._id %>"><%= surveys[count].title %></a></td>
                 <td>
                     <%= surveys[count].description %>
+                </td>
+                <td>
+                    <a href="/survey/survey-results/<%= surveys[count]._id %> " class="btn btn-outline-dark btn-sm" role="button">Results</a>
                 </td>
                 <td>
                     <a href="/survey/edit/<%= surveys[count]._id %> " class="btn btn-outline-dark btn-sm" role="button">Update</a>

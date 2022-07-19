@@ -1,4 +1,5 @@
 const Survey = require('../models/Survey');
+const SurveyResponse = require('../models/SurveyResponse');
 
 const displaySurveyList = (req, res, next) => {
   Survey.find((err, surveys) => {
@@ -54,7 +55,6 @@ const displayEditSurvey = (req, res, next) => {
 
 const processEditSurvey = (req, res, next) => {
   const surveyToUpdate = req.body;
-  console.log(surveyToUpdate);
   Survey.updateOne({ _id: surveyToUpdate._id }, surveyToUpdate, (err) => {
     if (err) {
       console.log(err);
@@ -78,6 +78,59 @@ const processDeleteSurvey = (req, res, next) => {
   });
 };
 
+const displayDoSurvey = (req, res, next) => {
+  let surveyId = req.params.id;
+  Survey.findById({ _id: surveyId }, (err, survey) => {
+    if (err) {
+      console.log(err);
+      return res.end(err);
+    }
+
+    res.render('survey/do-survey', { survey });
+  });
+};
+
+const processDoSurvey = (req, res, next) => {
+  const { surveyId, answers } = req.body;
+  const newSurveyResponse = SurveyResponse({
+    surveyId,
+    answers,
+  });
+
+  SurveyResponse.create(newSurveyResponse, (err, response) => {
+    if (err) {
+      console.log(err);
+      return res.end(err);
+    }
+
+    res.status(200).json({ success: true });
+  });
+};
+
+const displaySurveyResults = (req, res, next) => {
+  const surveyId = req.params.id;
+
+  Survey.findById({ _id: surveyId }, (err, survey) => {
+    if (err) {
+      console.log(err);
+      return res.end(err);
+    }
+
+    SurveyResponse.find({ surveyId: surveyId }, (err, responses) => {
+      if (err) {
+        console.log(err);
+        return res.end(err);
+      }
+
+      res.render('survey/survey-results', {
+        title: 'Survey Results',
+        survey,
+        responses,
+      });
+    });
+  });
+};
+
 module.exports = {
   displaySurveyList,
   displayAddSurvey,
@@ -85,4 +138,7 @@ module.exports = {
   displayEditSurvey,
   processEditSurvey,
   processDeleteSurvey,
+  displayDoSurvey,
+  processDoSurvey,
+  displaySurveyResults,
 };

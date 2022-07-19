@@ -7,9 +7,10 @@
   window.addEventListener('load', Start);
 })();
 
+//Add a question to the survey
 function addQuestion() {
   //get the form element
-  const newSurveyForm = document.getElementById('new-survey-form');
+  let newSurveyForm = document.getElementById('new-survey-form');
   //create a div container
   let questionContainer = document.createElement('div');
 
@@ -55,8 +56,7 @@ function addQuestion() {
   newSurveyForm.appendChild(questionContainer);
 }
 
-const createSurveyDataFromInput = () => {};
-
+//post new survey data to the server
 const addNewSurvey = () => {
   const title = document.getElementById('title')?.value || '';
 
@@ -111,6 +111,7 @@ const addNewSurvey = () => {
     });
 };
 
+//post updated survey data to the server
 function updateSurvey() {
   const title = document.getElementById('title')?.value || '';
 
@@ -165,5 +166,88 @@ function updateSurvey() {
     .catch((err) => {
       console.log(err);
       alert('Something went wrong, failed to create survey!');
+    });
+}
+
+//post survey response to server
+function submitSurveyResponse() {
+  //index of the current question
+  let questionIndex = 0;
+  //all the answers of this survey
+  let answers = [];
+
+  //loop through all the questions
+  while (true) {
+    //get all the answer elements of the current question
+    let answerElements = document.getElementsByClassName(questionIndex);
+
+    //no answer elements = no such question, end loop
+    if (answerElements.length === 0) {
+      break;
+    }
+    //get the question types
+    const questionType = answerElements[0].classList.value.split(' ')[0];
+
+    //get the answers depending on the question type
+    switch (questionType) {
+      case 'TEXT':
+        answers.push(answerElements[0].value);
+        break;
+      case 'T_F':
+        //check if true is selected
+        answers.push(answerElements[0].checked);
+        break;
+      case 'OPTIONS':
+        //get the value of the selected radio button
+        for (let i = 0; i < answerElements.length; i++) {
+          if (answerElements[i].checked) {
+            answers.push(answerElements[i].value);
+          }
+        }
+        break;
+      case 'CHECKBOX':
+        let checked = '';
+        //put all the selected option values into a string
+        for (let i = 0; i < answerElements.length; i++) {
+          if (answerElements[i].checked) {
+            checked += `${answerElements[i].value} `;
+          }
+        }
+        answers.push(checked);
+        break;
+      default:
+        //if cannot get the question type, add blank answer to prevent shifting of answers
+        answers.push('');
+        break;
+    }
+
+    //to the next question
+    questionIndex++;
+  }
+
+  //get surveyId from URL
+  const surveyId = document.URL.substring(document.URL.lastIndexOf('/') + 1);
+  const data = { surveyId, answers };
+  const url = `/survey/do-survey/${surveyId}`;
+
+  const options = {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  //post to server
+  //return to survey list when response is submitted
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((data) => {
+      window.location.href = '/survey';
+      alert('Response submitted!');
+    })
+    .catch((err) => {
+      console.log(err);
+      alert('Something went wrong, failed to submit response!');
     });
 }

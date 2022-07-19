@@ -1,3 +1,4 @@
+  <!--
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,3 +11,27 @@
     <p>Welcome to Freebirds Survey!</p>
 </body>
 </html>
+-->
+
+
+<%- include('partials/header.ejs'); -%>
+
+<%- include('partials/main_nav.ejs'); -%>
+  
+
+  <!-- Main Content -->
+  <main class="bgBlack">
+    <div class=" container jumbotron">
+      <h1 class="display-4"><%= title %></h1>
+      <% if(title == "Home") { %>
+       <%- include('partials/home'); -%>
+      <%} else if(title == "About") { %>
+        <%- include('partials/about') -%>
+       <%}
+       %>
+    </div>
+  </main>
+
+  <%- include('partials/bottom_nav.ejs'); -%>  
+
+  <%- include('partials/footer.ejs'); -%>

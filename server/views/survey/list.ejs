@@ -1,16 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<%- include('../partials/header.ejs'); -%>
+
+<%- include('../partials/main_nav.ejs'); -%>
+  
+<!--
     <p>Survey List</p>
-    <!-- Show a list of surveys here -->
+
     <% for(let count=0; count < surveys.length; count++){ %>
         <a href="/survey/edit/<%= surveys[count]._id %>"><%= surveys[count].title %></a>
-    <% } %>
-</body>
-</html>
+    <% } %> 
+-->
+
+
+    <div class="margin container">
+        <div class="row justify-content-md-center">
+            <div class="col-md-auto">
+                <h1 class="text-center">Survey List</h1><br>
+    <table class="table table-bordered table-striped table-hover text-center"> 
+        <tr>
+            <th>Survey Title</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% for (let count=0; count < surveys.length; count++) { %>
+            <tr>
+                <td><%= surveys[count].title %></td>
+                <td>
+                    <%= surveys[count].description %>
+                </td>
+                <td>
+                    <a href="/survey/edit/<%= surveys[count]._id %> " class="btn btn-outline-dark btn-sm" role="button">Update</a>
+                </td>
+                <td>
+                    <a href="/survey/delete/<%= surveys[count]._id %>" class="btn btn-outline-danger btn-sm" role="button">Delete</a>
+                </td>
+            </tr>
+            <%}%>
+    </table>
+    <a class="btn btn-dark btn-sm" style="float: right;" href="/survey/add">Add your own Survey</a>
+    <br><br><br><br><br>
+</div>
+</div>
+</div>
+
+
+<%- include('../partials/bottom_nav.ejs'); -%>  
+
+<%- include('../partials/footer.ejs'); -%>
+

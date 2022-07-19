@@ -230,8 +230,6 @@ function submitSurveyResponse() {
   const data = { surveyId, answers };
   const url = `/survey/do-survey/${surveyId}`;
 
-  console.log(data);
-
   const options = {
     method: 'POST',
     body: JSON.stringify(data),

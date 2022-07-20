@@ -1,0 +1,30 @@
+<div class="container">
+    <form id="new-survey-form">
+        <h1>{{title}}</h1>
+        <!-- Survey Title -->
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id='title'/>
+        </div>
+        <!-- Survey Description -->
+        <div>
+            <label for="description">Description</label>
+            <input type="description" id='description'/>
+        </div>
+        <!-- Survey Questions -->
+        <div>
+            <label for="description">Question</label>
+            <input type="text" class='question'/>
+            <label>Question Type</label>
+            <select class="type">
+                <option selected value="TEXT">Text</option>
+                <option value="T_F">True or False</option>
+                <option value="OPTIONS">Options</option>
+                <option value="CHECKBOX">Checkboxes</option>
+            </select>
+        </div>
+    </form>
+    <!-- Buttons -->
+    <button id="add-question-btn" (click)="addQuestion()">Add a question</button>
+    <button id="add-question-btn" (click)="addNewSurvey()">Submit</button>
+</div>

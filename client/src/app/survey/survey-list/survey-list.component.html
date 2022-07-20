@@ -1,0 +1,38 @@
+<div class="margin container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+            <h1 class="text-center">Survey List</h1><br>
+<table class="table table-bordered table-striped table-hover text-center"> 
+    <tr>
+        <th>Survey Title</th>
+        <th>Description</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    <!-- loop through each survey -->
+        <tr>
+            <td><a href="/surveys/do-survey/123">
+                <!-- survey title here -->
+                Survey Title
+            </a></td>
+            <td>
+                <!-- survey description here -->
+                Survey Description
+            </td>
+            <td>
+                <a href="/surveys/results/123" class="btn btn-outline-dark btn-sm" role="button">Results</a>
+            </td>
+            <td>
+                <a href="/surveys/edit/123" class="btn btn-outline-dark btn-sm" role="button">Update</a>
+            </td>
+            <td>
+                <button (click)="deleteSurvey('123')" class="btn btn-outline-danger btn-sm">Delete</button>
+            </td>
+        </tr>
+</table>
+<a class="btn btn-dark btn-sm" style="float: right;" href="/surveys/add">Add your own Survey</a>
+<br><br><br><br><br>
+</div>
+</div>
+</div>

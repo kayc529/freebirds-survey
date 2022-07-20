@@ -11,23 +11,21 @@
         <th></th>
     </tr>
     <!-- loop through each survey -->
-        <tr>
-            <td><a href="/surveys/do-survey/123">
-                <!-- survey title here -->
-                Survey Title
+        <tr *ngFor='let survey of surveys'>
+            <td><a href="/surveys/do-survey/{{survey._id}}">
+                {{survey.title}}
             </a></td>
             <td>
-                <!-- survey description here -->
-                Survey Description
+                {{survey.description}}
             </td>
             <td>
-                <a href="/surveys/results/123" class="btn btn-outline-dark btn-sm" role="button">Results</a>
+                <a href="/surveys/results/{{survey._id}}" class="btn btn-outline-dark btn-sm" role="button">Results</a>
             </td>
             <td>
-                <a href="/surveys/edit/123" class="btn btn-outline-dark btn-sm" role="button">Update</a>
+                <a href="/surveys/edit/{{survey._id}}" class="btn btn-outline-dark btn-sm" role="button">Update</a>
             </td>
             <td>
-                <button (click)="deleteSurvey('123')" class="btn btn-outline-danger btn-sm">Delete</button>
+                <button (click)="deleteSurvey(survey._id)" class="btn btn-outline-danger btn-sm">Delete</button>
             </td>
         </tr>
 </table>

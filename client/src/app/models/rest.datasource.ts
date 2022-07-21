@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Survey } from './survey.model';
@@ -11,10 +11,18 @@ export class RestDataSource {
   baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}`;
+    if (isDevMode()) {
+      this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}`;
+    } else {
+      this.baseUrl = '';
+    }
   }
 
-  getSurveys(): Observable<Survey[]> {
-    return this.http.get<Survey[]>(this.baseUrl + '/api/v1/surveys');
+  getSurveys(): Observable<any> {
+    return this.http.get<any>(this.baseUrl + '/api/v1/surveys');
+  }
+
+  getSurveyReponses(): Observable<any> {
+    return this.http.get<Survey[]>(this.baseUrl + '/api/v1/surveys/results');
   }
 }

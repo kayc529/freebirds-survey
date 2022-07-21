@@ -9,8 +9,8 @@ import { SurveyRepository } from './survey.repository';
   providers: [
     SurveyRepository,
     StaticDataSource,
-    { provide: StaticDataSource },
-    // { provide: StaticDataSource, useClass: RestDataSource },
+    // { provide: StaticDataSource },
+    { provide: StaticDataSource, useClass: RestDataSource },
   ],
 })
 export class ModelModule {}

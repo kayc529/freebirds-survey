@@ -23,9 +23,6 @@ mongoDB.once('open', () => {
 });
 
 let app = express();
-// view engine setup
-// app.set('views', path.join(__dirname, '../views'));
-// app.set('view engine', 'ejs'); // express  -e
 app.use(express.json());
 app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
@@ -37,8 +34,8 @@ app.use(express.static(path.join(__dirname, '/node_modules')));
 app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 
 //routing
-app.use('/', indexRouter);
-app.use('/survey', surveyRouter);
+// app.use('/api/v1', indexRouter);
+app.use('/api/v1/surveys', surveyRouter);
 app.get('/*', function (req, res) {
   res.sendFile(
     path.join(__dirname + '/client/dist/freebirds-survey/index.html')

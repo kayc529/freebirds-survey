@@ -13,10 +13,7 @@ export class SurveyListComponent implements OnInit {
   ngOnInit(): void {}
 
   get surveys(): Survey[] {
-    let s = this.repository.getSurveys();
-    console.log(s);
-
-    return s;
+    return this.repository.getSurveys();
   }
 
   deleteSurvey(surveyId: string): void {

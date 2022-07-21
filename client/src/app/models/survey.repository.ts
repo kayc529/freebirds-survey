@@ -10,10 +10,10 @@ export class SurveyRepository {
 
   constructor(private dataSource: StaticDataSource) {
     dataSource.getSurveys().subscribe((data) => {
-      this.surveys = data;
+      this.surveys = data.surveys;
     });
     dataSource.getSurveyReponses().subscribe((data) => {
-      this.responses = data;
+      this.responses = data.responses;
     });
   }
 

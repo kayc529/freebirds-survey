@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Survey } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
+import { SurveyResponse } from 'src/app/models/surveyResponse.model';
 
 @Component({
   selector: 'app-survey-results',
@@ -24,8 +25,15 @@ export class SurveyResultsComponent implements OnInit {
     });
   }
 
+  //get single survey with current surveyId
   get survey(): Survey | undefined {
     return this.repository.getSurvey(this.surveyId);
+  }
+
+  //get survey responses for current surveyId
+  get responses(): SurveyResponse[] {
+    console.log(this.repository.getResponses(this.surveyId));
+    return this.repository.getResponses(this.surveyId);
   }
 
   ngOnInit(): void {}

@@ -4,10 +4,11 @@ const SurveyResponse = require('../models/SurveyResponse');
 const displaySurveyList = (req, res, next) => {
   Survey.find((err, surveys) => {
     if (err) {
-      return console.error(err);
+      console.log(err);
+      return res.status(500).send('something went wrong');
     }
 
-    res.render('survey/list', { title: 'Survey', surveys });
+    res.status(200).json({ success: true, surveys });
   });
 };
 
@@ -30,8 +31,7 @@ const processAddSurvey = (req, res, next) => {
   Survey.create(newSurvey, (err, Book) => {
     if (err) {
       console.log(err);
-      res.end(err);
-      return;
+      return res.status(500).send('Something went wrong');
     }
 
     res.status(201).json({ success: true });
@@ -43,13 +43,14 @@ const displayEditSurvey = (req, res, next) => {
   Survey.findById({ _id: surveyId }, (err, surveyToEdit) => {
     if (err) {
       console.log(err);
-      return res.end(err);
+      return res.status(500).send('Something went wrong');
     }
 
-    res.render('survey/edit', {
-      title: 'Edit Survey',
-      survey: surveyToEdit,
-    });
+    // res.render('survey/edit', {
+    //   title: 'Edit Survey',
+    //   survey: surveyToEdit,
+    // });
+    res.status(200).json({ success: true, survey: surveyToEdit });
   });
 };
 
@@ -58,7 +59,7 @@ const processEditSurvey = (req, res, next) => {
   Survey.updateOne({ _id: surveyToUpdate._id }, surveyToUpdate, (err) => {
     if (err) {
       console.log(err);
-      return res.end(err);
+      return res.status(500).send('Something went wrong');
     } else {
       res.status(200).json({ success: true });
     }
@@ -70,10 +71,11 @@ const processDeleteSurvey = (req, res, next) => {
   Survey.remove({ _id: surveyId }, (err) => {
     if (err) {
       console.log(err);
-      res.end(err);
+      return res.status(500).send('Something went wrong');
     } else {
       // refresh the survey list
-      res.redirect('/survey');
+      // res.redirect('/survey');
+      res.status(200).json({ success: true });
     }
   });
 };
@@ -83,10 +85,11 @@ const displayDoSurvey = (req, res, next) => {
   Survey.findById({ _id: surveyId }, (err, survey) => {
     if (err) {
       console.log(err);
-      return res.end(err);
+      return res.status(500).send('Something went wrong');
     }
 
-    res.render('survey/do-survey', { survey });
+    // res.render('survey/do-survey', { survey });
+    res.status(200).json({ success: true, survey });
   });
 };
 
@@ -100,7 +103,7 @@ const processDoSurvey = (req, res, next) => {
   SurveyResponse.create(newSurveyResponse, (err, response) => {
     if (err) {
       console.log(err);
-      return res.end(err);
+      return res.status(500).send('Something went wrong');
     }
 
     res.status(200).json({ success: true });
@@ -113,21 +116,33 @@ const displaySurveyResults = (req, res, next) => {
   Survey.findById({ _id: surveyId }, (err, survey) => {
     if (err) {
       console.log(err);
-      return res.end(err);
+      return res.status(500).send('Something went wrong');
     }
 
     SurveyResponse.find({ surveyId: surveyId }, (err, responses) => {
       if (err) {
         console.log(err);
-        return res.end(err);
+        return res.status(500).send('Something went wrong');
       }
 
-      res.render('survey/survey-results', {
-        title: 'Survey Results',
-        survey,
-        responses,
-      });
+      // res.render('survey/survey-results', {
+      //   title: 'Survey Results',
+      //   survey,
+      //   responses,
+      // });
+      res.status(200).json({ success: true, responses });
     });
+  });
+};
+
+const getAllSurveyResults = (req, res, next) => {
+  SurveyResponse.find({}, (err, responses) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).send('Something went wrong');
+    }
+
+    res.status(200).json({ success: true, responses });
   });
 };
 
@@ -141,4 +156,5 @@ module.exports = {
   displayDoSurvey,
   processDoSurvey,
   displaySurveyResults,
+  getAllSurveyResults,
 };

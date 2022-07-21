@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && ng build"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "engines": {
     "node": "^12.18.3",

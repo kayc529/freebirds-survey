@@ -1,10 +1,23 @@
 ## Starting the project
 
-After you clone the project to your computer, run `npm install` to ensure all packages are installed before you start the project.
+After you clone the project to your computer, ensure all packages are installed before you start the project.
 
+server: `npm install`
+
+client: `cd client && npm install`
+
+**You have two options to run the project:**
+#### 1) Seperate frontend and backend servers
+With this option, you can see immediate changes made in the frontend
+1. Start the backend server `npm start`
+2. Start the frontend server `cd client && ng serve --open`
+
+#### 2) Using backend server only
+With this option, you only have to start the backend server, but you must build the frontend app again to see changes
+1. Build the frontend app: `cd client && ng build`
+2. Start the backend server: `cd .. && npm start`
   
-
-## Branches
+## Basic Git Commands
 
 The **main** branch consists of production codes, which means *it should only contain codes that 100% work*. Please ensure your codes are well tested before merging codes into the **main** branch.
 

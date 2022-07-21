@@ -1,13 +1,13 @@
 export class Survey {
   constructor(
     public _id: string,
-    public title: string,
-    public questions: SurveyQuestion[],
+    public title?: string,
+    public questions?: SurveyQuestion[],
     public description?: string
   ) {}
 }
 
-class SurveyQuestion {
+export class SurveyQuestion {
   constructor(
     public question: string,
     public questionType: string,

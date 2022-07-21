@@ -1,4 +1,6 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Survey } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
 
@@ -8,15 +10,28 @@ import { SurveyRepository } from 'src/app/models/survey.repository';
   styleUrls: ['./survey-list.component.css'],
 })
 export class SurveyListComponent implements OnInit {
-  constructor(private repository: SurveyRepository) {}
+  constructor(private repository: SurveyRepository, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('really');
+
+    this.repository.getSurveys();
+  }
 
   get surveys(): Survey[] {
     return this.repository.getSurveys();
   }
 
   deleteSurvey(surveyId: string): void {
-    console.log('delete survey ', surveyId);
+    this.repository.deleteSurvey(surveyId).subscribe(
+      (data: any) => {
+        //refresh list when survey is successfully deleted
+        window.location.reload();
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err);
+        alert('Failed to delete survey!');
+      }
+    );
   }
 }

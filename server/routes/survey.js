@@ -3,7 +3,6 @@ const router = express.Router();
 
 const {
   displaySurveyList,
-  displayAddSurvey,
   processAddSurvey,
   displayEditSurvey,
   processEditSurvey,
@@ -20,7 +19,7 @@ router.route('/add').post(processAddSurvey);
 
 router.route('/edit/:id').get(displayEditSurvey).post(processEditSurvey);
 
-router.get('/delete/:id', processDeleteSurvey);
+router.delete('/delete/:id', processDeleteSurvey);
 
 router.route('/do-survey/:id').get(displayDoSurvey).post(processDoSurvey);
 

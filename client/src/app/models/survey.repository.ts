@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { RestDataSource } from './rest.datasource';
 import { StaticDataSource } from './static.datasource';
 import { Survey } from './survey.model';
 import { SurveyResponse } from './surveyResponse.model';
@@ -8,7 +9,7 @@ export class SurveyRepository {
   private surveys: Survey[] = [];
   private responses: SurveyResponse[] = [];
 
-  constructor(private dataSource: StaticDataSource) {
+  constructor(private dataSource: RestDataSource) {
     dataSource.getSurveys().subscribe((data) => {
       this.surveys = data.surveys;
     });
@@ -29,5 +30,21 @@ export class SurveyRepository {
     return this.responses.filter((response) => {
       return response.surveyId === surveyId.trim();
     });
+  }
+
+  addSurvey(survey: Survey): any {
+    return this.dataSource.addSurvey(survey);
+  }
+
+  deleteSurvey(surveyId: string): any {
+    return this.dataSource.deleteSurvey(surveyId);
+  }
+
+  updateSurvey(survey: Survey): any {
+    return this.dataSource.updateSurvey(survey);
+  }
+
+  addSurveyResponse(response: SurveyResponse): any {
+    return this.dataSource.addSurveyResponse(response);
   }
 }

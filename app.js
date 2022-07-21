@@ -5,15 +5,14 @@ let path = require('path');
 let cookieParser = require('cookie-parser');
 let logger = require('morgan');
 let cors = require('cors');
-let path = require('path');
 
 //import routers
-let indexRouter = require('../routes/index');
-let surveyRouter = require('../routes/survey');
+let indexRouter = require('./server/routes/index');
+let surveyRouter = require('./server/routes/survey');
 
 // database setup
 let mongoose = require('mongoose');
-let db = require('./db');
+let db = require('./server/config/db');
 
 // connect to DB
 mongoose.connect(db.URI);
@@ -32,17 +31,17 @@ app.use(logger('dev'));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../../public')));
-app.use(express.static(path.join(__dirname, '../../node_modules')));
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/node_modules')));
 //get resources from frontend build folder
-app.use(express.static(__dirname + '../../client/dist/freebirds-survey'));
+app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 
 //routing
 app.use('/', indexRouter);
 app.use('/survey', surveyRouter);
 app.get('/*', function (req, res) {
   res.sendFile(
-    path.join(__dirname + '../../client/dist/freebirds-survey/index.html')
+    path.join(__dirname + '/client/dist/freebirds-survey/index.html')
   );
 });
 

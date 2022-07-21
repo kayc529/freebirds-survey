@@ -36,7 +36,7 @@ const routes: Routes = [
     component: SurveyResultsComponent,
     data: { title: 'Survey Results' },
   },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

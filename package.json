@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "client": "cd client && ng build",
+    "dev": "nodemon server.js"
   },
   "engines": {
     "node": "^12.18.3",

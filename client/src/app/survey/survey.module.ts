@@ -7,6 +7,7 @@ import { SurveyResultsComponent } from './survey-results/survey-results.componen
 import { ModelModule } from '../models/model.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { SurveyManagementComponent } from './survey-management/survey-management.component';
 
 @NgModule({
   imports: [ModelModule, BrowserModule, FormsModule],
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     AddSurveyComponent,
     EditSurveyComponent,
     SurveyResultsComponent,
+    SurveyManagementComponent,
   ],
   exports: [SurveyListComponent],
 })

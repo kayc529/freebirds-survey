@@ -9,6 +9,14 @@ let cors = require('cors');
 //import routers
 let indexRouter = require('./server/routes/index');
 let surveyRouter = require('./server/routes/survey');
+let userRouter = require('./server/routes/user');
+
+//session
+let session = require('express-session');
+let passport = require('passport');
+let passportLocal = require('passport-local');
+let localStrategy = passportLocal.Strategy;
+let flash = require('connect-flash');
 
 // database setup
 let mongoose = require('mongoose');
@@ -33,9 +41,32 @@ app.use(express.static(path.join(__dirname, '/node_modules')));
 //get resources from frontend build folder
 app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 
+//setup express session
+app.use(
+  session({
+    secret: 'SomeSecret',
+    saveUninitialized: true,
+    resave: false,
+  })
+);
+
+//setup flash
+app.use(flash());
+
+//setup passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//passport user configuration
+const User = require('./server/models/User');
+passport.use(User.createStrategy());
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 //routing
 // app.use('/api/v1', indexRouter);
 app.use('/api/v1/surveys', surveyRouter);
+app.use('/api/v1/users', userRouter);
 app.get('/*', function (req, res) {
   res.sendFile(
     path.join(__dirname + '/client/dist/freebirds-survey/index.html')

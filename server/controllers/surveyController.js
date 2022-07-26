@@ -18,9 +18,6 @@ const displayAddSurvey = (req, res, next) => {
 
 const processAddSurvey = (req, res, next) => {
   const { title, description, questions } = req.body;
-  console.log('title', title);
-  console.log('description', description);
-  console.log('questions', questions);
 
   let newSurvey = Survey({
     title: title,
@@ -45,7 +42,6 @@ const displayEditSurvey = (req, res, next) => {
       console.log(err);
       return res.status(500).send('Something went wrong');
     }
-
     // res.render('survey/edit', {
     //   title: 'Edit Survey',
     //   survey: surveyToEdit,
@@ -87,7 +83,6 @@ const displayDoSurvey = (req, res, next) => {
       console.log(err);
       return res.status(500).send('Something went wrong');
     }
-
     // res.render('survey/do-survey', { survey });
     res.status(200).json({ success: true, survey });
   });

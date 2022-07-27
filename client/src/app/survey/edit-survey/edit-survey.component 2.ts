@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Survey } from 'src/app/models/survey.model';
+import { Survey, SurveyQuestion } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
 
 @Component({
@@ -78,5 +78,58 @@ export class EditSurveyComponent implements OnInit {
     newSurveyForm?.appendChild(questionContainer);
   }
 
-  updateSurvey(): void {}
+  updateSurvey(): void {
+    const title =
+      (<HTMLInputElement>document.getElementById('title'))?.value || '';
+
+    //check if the title is blank
+    if (!title) {
+      alert('Please enter a title');
+      return;
+    }
+
+    const description =
+      (<HTMLInputElement>document.getElementById('description'))?.value || '';
+    const questionInputs = document.getElementsByClassName('question');
+    const typeSelects = document.getElementsByClassName('type');
+    let questions: SurveyQuestion[] = [];
+
+    //check if any question is blank
+    //loop to create an array of question object
+    for (let i = 0; i < questionInputs.length; i++) {
+      let question = (<HTMLInputElement>questionInputs[i]).value;
+      if (!question) {
+        alert('You cannot leave a question blank!');
+        return;
+      }
+      questions.push({ question, questionType: '' });
+    }
+
+    //loop to add questionType to each question object
+    for (let i = 0; i < typeSelects.length; i++) {
+      questions[i] = {
+        ...questions[i],
+        questionType: (<HTMLInputElement>typeSelects[i]).value,
+      };
+    }
+
+    const surveyToEdit: Survey = {
+      _id: this.surveyId,
+      title,
+      description,
+      questions,
+    };
+
+    console.log(surveyToEdit);
+
+    this.repository.updateSurvey(surveyToEdit).subscribe(
+      (data: any) => {
+        alert('Survey updated!');
+      },
+      (err: any) => {
+        console.log(err);
+        alert('Failed to update survey, please try again!');
+      }
+    );
+  }
 }

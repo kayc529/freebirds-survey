@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Survey, SurveyQuestion } from 'src/app/models/survey.model';
-import { SurveyRepository } from 'src/app/models/survey.repository';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-survey',
@@ -10,11 +8,7 @@ import { SurveyRepository } from 'src/app/models/survey.repository';
 })
 export class AddSurveyComponent implements OnInit {
   title: string;
-  constructor(
-    private route: ActivatedRoute,
-    private repository: SurveyRepository,
-    private router: Router
-  ) {
+  constructor(private route: ActivatedRoute) {
     this.title = route.snapshot.data['title'];
   }
 
@@ -82,7 +76,7 @@ export class AddSurveyComponent implements OnInit {
       (<HTMLInputElement>document.getElementById('description'))?.value || '';
     const questionInputs = document.getElementsByClassName('question');
     const typeSelects = document.getElementsByClassName('type');
-    let questions: SurveyQuestion[] = [];
+    let questions = [];
 
     //check if any question is blank
     //loop to create an array of question object
@@ -92,7 +86,7 @@ export class AddSurveyComponent implements OnInit {
         alert('You cannot leave a question blank!');
         return;
       }
-      questions.push({ question, questionType: '' });
+      questions.push({ question });
     }
 
     //loop to add questionType to each question object
@@ -103,16 +97,30 @@ export class AddSurveyComponent implements OnInit {
       };
     }
 
-    const surveyToAdd: Survey = { _id: '', title, description, questions };
+    const data = { title, description, questions };
+    const url = '/survey/add';
 
-    this.repository.addSurvey(surveyToAdd).subscribe(
-      (data: any) => {
-        alert('Survey added!');
+    console.log(data);
+
+    const options = {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
       },
-      (err: any) => {
-        console.log(err);
-        alert('Failed to add survey, please try again!');
-      }
-    );
+    };
+
+    //TODO
+    //post to server
+    //return to list when new survey is successfully created
+    // fetch(url, options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     window.location.href = '/survey';
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert('Something went wrong, failed to create survey!');
+    //   });
   }
 }

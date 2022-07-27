@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Survey } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
+import { SurveyResponse } from 'src/app/models/surveyResponse.model';
 
 @Component({
   selector: 'app-do-survey',
@@ -14,12 +15,12 @@ export class DoSurveyComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private repository: SurveyRepository
+    private repository: SurveyRepository,
+    private router: Router
   ) {
     //get surveyId from URL
     this.route.params.subscribe((params: Params) => {
       this.surveyId = params['id'];
-      console.log('surveyId: ', this.surveyId);
     });
   }
 
@@ -33,7 +34,7 @@ export class DoSurveyComponent implements OnInit {
     //index of the current question
     let questionIndex = 0;
     //all the answers of this survey
-    let answers = [];
+    let answers: string[] = [];
 
     //loop through all the questions
     while (true) {
@@ -58,7 +59,9 @@ export class DoSurveyComponent implements OnInit {
           break;
         case 'T_F':
           //check if true is selected
-          answers.push((<HTMLInputElement>answerElements[0]).checked);
+          answers.push(
+            (<HTMLInputElement>answerElements[0]).checked.toString()
+          );
           break;
         case 'OPTIONS':
           //get the value of the selected radio button
@@ -89,7 +92,22 @@ export class DoSurveyComponent implements OnInit {
     }
 
     //get surveyId from URL
-    const data = { surveyId: this.surveyId, answers };
-    console.log(data);
+    const newResponse: SurveyResponse = {
+      _id: '',
+      surveyId: this.surveyId,
+      answers,
+    };
+
+    //submit response
+    this.repository.addSurveyResponse(newResponse).subscribe(
+      (data: any) => {
+        alert('Response submitted!');
+        this.router.navigateByUrl('/surveys');
+      },
+      (err: any) => {
+        console.log(err);
+        alert('Failed to submit response, please try again!');
+      }
+    );
   }
 }

@@ -111,7 +111,8 @@ export class AddSurveyComponent implements OnInit {
       },
       (err: any) => {
         console.log(err);
-        alert('Failed to add survey, please try again!');
+        const msg = err.error.msg || 'Failed to add survey';
+        alert(msg);
       }
     );
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
+import { DummyLoginComponent } from './pages/dummy-login/dummy-login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
 import { DoSurveyComponent } from './survey/do-survey/do-survey.component';
@@ -35,6 +36,10 @@ const routes: Routes = [
     path: 'surveys/results/:id',
     component: SurveyResultsComponent,
     data: { title: 'Survey Results' },
+  },
+  {
+    path: 'login',
+    component: DummyLoginComponent,
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

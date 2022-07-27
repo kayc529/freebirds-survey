@@ -8,11 +8,11 @@ export class StaticDataSource {
   private surveys: Survey[] = dummySurveys;
   private responses: SurveyResponse[] = dummyResponses;
 
-  getSurveys(): Observable<any> {
+  getSurveys(): Observable<Survey[]> {
     return from([this.surveys]);
   }
 
-  getSurveyReponses(): Observable<any> {
+  getSurveyReponses(): Observable<SurveyResponse[]> {
     return from([this.responses]);
   }
 }

@@ -128,7 +128,8 @@ export class EditSurveyComponent implements OnInit {
       },
       (err: any) => {
         console.log(err);
-        alert('Failed to update survey, please try again!');
+        const msg = err.error.msg || 'Failed to update survey';
+        alert(msg);
       }
     );
   }

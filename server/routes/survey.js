@@ -13,14 +13,8 @@ const {
   getAllSurveyResults,
 } = require('../controllers/surveyController');
 
-const requireAuth = (res, req, next) => {
-  //check if the user is logged in
-  if (!req.isAuthenticated()) {
-    return res.status(401).json({ msg: 'Not authenticated' });
-  }
-
-  next();
-};
+//auth middleware
+const { requireAuth } = require('../middleware/authentication');
 
 router.get('/', displaySurveyList);
 
@@ -28,7 +22,7 @@ router.route('/add').post(requireAuth, processAddSurvey);
 
 router
   .route('/edit/:id')
-  .get(displayEditSurvey)
+  .get(requireAuth, displayEditSurvey)
   .post(requireAuth, processEditSurvey);
 
 router.delete('/delete/:id', requireAuth, processDeleteSurvey);

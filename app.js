@@ -7,7 +7,7 @@ let logger = require('morgan');
 let cors = require('cors');
 
 //import routers
-let indexRouter = require('./server/routes/index');
+// let indexRouter = require('./server/routes/index');
 let surveyRouter = require('./server/routes/survey');
 let userRouter = require('./server/routes/user');
 
@@ -42,26 +42,26 @@ app.use(express.static(path.join(__dirname, '/node_modules')));
 app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 
 //setup express session
-app.use(
-  session({
-    secret: 'SomeSecret',
-    saveUninitialized: true,
-    resave: false,
-  })
-);
+// app.use(
+//   session({
+//     secret: 'SomeSecret',
+//     saveUninitialized: true,
+//     resave: false,
+//   })
+// );
 
-//setup flash
-app.use(flash());
+// //setup flash
+// app.use(flash());
 
-//setup passport
-app.use(passport.initialize());
-app.use(passport.session());
+// //setup passport
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-//passport user configuration
-const User = require('./server/models/User');
-passport.use(User.createStrategy());
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// //passport user configuration
+// const User = require('./server/models/User');
+// passport.use(User.createStrategy());
+// passport.serializeUser(User.serializeUser());
+// passport.deserializeUser(User.deserializeUser());
 
 //routing
 // app.use('/api/v1', indexRouter);

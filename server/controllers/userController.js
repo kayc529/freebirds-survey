@@ -1,54 +1,40 @@
 const User = require('../models/User');
-const passport = require('passport');
+const { createTokenUser, createAccessToken } = require('../utils/jwt');
 
-const loginUser = (req, res, next) => {
-  passport.authenticate('local', (err, user, info) => {
-    if (err) {
-      console.log(err);
-      return next(err);
-    }
+const loginUser = async (req, res) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username: username });
 
-    if (!user) {
-      return res
-        .status(401)
-        .json({ success: false, msg: 'Authentication Error' });
-    }
+  if (!user) {
+    return res.status(401).json({ success: false, msg: 'Invalid Credentials' });
+  }
 
-    req.login(user, (err) => {
-      if (err) {
-        console.log(err);
-        return next(err);
-      }
+  const isMatch = await user.comparePasswords(password);
 
-      res.status(200).json({ success: true, user: user });
-    });
-  })(req, res, next);
+  if (!isMatch) {
+    return res.status(401).json({ success: false, msg: 'Invalid Credentials' });
+  }
+
+  const tokenUser = createTokenUser(user);
+  const accessToken = createAccessToken({ user: tokenUser });
+
+  res.status(200).json({ success: true, user: tokenUser, accessToken });
 };
 
-const registerUser = (req, res, next) => {
-  let newUser = new User({
-    username: req.body.username,
-    firstName: req.body.username,
-    lastName: req.body.lastName,
-    email: req.body.email,
-  });
-
-  User.register(newUser, req.body.password, (err, user) => {
-    if (err) {
-      console.log(err);
-      return res
-        .status(400)
-        .json({ success: false, msg: 'failed to register user' });
-    }
-
-    return passport.authenticate('local')(req, res, () => {
-      res.status(201).json({ success: true, user: user });
-    });
-  });
+const registerUser = async (req, res) => {
+  const { username, password, firstName, lastName, email } = req.body;
+  const newUser = { username, password, firstName, lastName, email };
+  try {
+    const user = await User.create(newUser);
+    const tokenUser = createTokenUser(user);
+    const accessToken = createAccessToken({ user: tokenUser });
+    res.status(201).json({ success: true, user: tokenUser, accessToken });
+  } catch (error) {
+    res.status(500).json({ success: false, msg: 'Failed to register user' });
+  }
 };
 
 const logoutUser = (req, res, next) => {
-  req.logout();
   res.status(200).json({ success: true, msg: 'user logged out' });
 };
 

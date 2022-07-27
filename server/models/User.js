@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
+const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema(
   {
@@ -8,6 +8,10 @@ const userSchema = new mongoose.Schema(
       required: 'Username is required',
       trim: true,
       unique: true,
+    },
+    password: {
+      type: String,
+      required: 'Password is required',
     },
     firstName: {
       type: String,
@@ -31,9 +35,18 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//config options for User Model
-let options = { missingPasswordError: 'Wrong/Missing password' };
+userSchema.pre('save', async function () {
+  if (!this.isModified('password')) {
+    return;
+  }
 
-userSchema.plugin(passportLocalMongoose, options);
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+userSchema.methods.comparePasswords = async function (enteredPassword) {
+  const isMatch = await bcrypt.compare(enteredPassword, this.password);
+  return isMatch;
+};
 
 module.exports = mongoose.model('User', userSchema);

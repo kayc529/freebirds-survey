@@ -30,7 +30,8 @@ export class SurveyListComponent implements OnInit {
       },
       (err: HttpErrorResponse) => {
         console.log(err);
-        alert('Failed to delete survey!');
+        const msg = err.error.msg || 'Failed to remove survey';
+        alert(msg);
       }
     );
   }

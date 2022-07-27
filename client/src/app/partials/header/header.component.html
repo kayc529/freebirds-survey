@@ -15,6 +15,15 @@
             <li class="nav-item">
                 <a class="nav-link" href="/surveys"><i class="fab fa-elementor"></i> Surveys </a>
             </li>
+            <li class="nav-item">
+                <a *ngIf='accessToken' class="nav-link" href="/surveys"><i class="fab fa-elementor"></i> Survey Management </a>
+            </li>
+            <li class="nav-item">
+                <a *ngIf='!accessToken; else logoutBlock' class="nav-link" href="/login"><i class="fab fa-elementor"></i> Login </a>
+                <ng-template #logoutBlock>
+                    <a class="nav-link" (click)="logout()"><i class="fab fa-elementor"></i> Logout </a>
+                </ng-template>
+            </li>
         </ul>
     </div>
   </nav>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserRepository } from 'src/app/models/user.repository';
 
 @Component({
   selector: 'partials-header',
@@ -6,7 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  public accessToken: string | null = localStorage.getItem('access_token');
 
-  ngOnInit(): void {}
+  constructor(private repository: UserRepository) {}
+
+  ngOnInit(): void {
+    this.accessToken = localStorage.getItem('access_token');
+  }
+
+  logout() {
+    this.repository.logoutUser().subscribe(
+      (data) => {
+        localStorage.removeItem('access_token');
+        window.location.href = window.location.origin + '/home';
+      },
+      (err) => {
+        console.log(err);
+        localStorage.removeItem('access_token');
+        window.location.href = window.location.origin + '/home';
+      }
+    );
+  }
 }

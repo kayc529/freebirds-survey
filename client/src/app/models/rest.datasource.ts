@@ -37,29 +37,29 @@ export class RestDataSource {
   getSurveyReponses(): Observable<any> {
     const url = this.baseUrl + '/api/v1/surveys/results';
     const httpHeader: HttpHeaders = this.createRequestHeader();
-    // return this.http.get<Survey[]>(url, { headers: httpHeader });
-    return this.http.get<Survey[]>(url);
+    return this.http.get<Survey[]>(url, { headers: httpHeader });
+    // return this.http.get<Survey[]>(url);
   }
 
   addSurvey(survey: Survey): Observable<any> {
     const url = this.baseUrl + '/api/v1/surveys/add';
     const httpHeader: HttpHeaders = this.createRequestHeader();
-    // return this.http.post<Survey>(url, survey, { headers: httpHeader });
-    return this.http.post<Survey>(url, survey);
+    return this.http.post<Survey>(url, survey, { headers: httpHeader });
+    // return this.http.post<Survey>(url, survey);
   }
 
   updateSurvey(survey: Survey): Observable<any> {
     const url = this.baseUrl + '/api/v1/surveys/edit/' + survey._id;
     const httpHeader: HttpHeaders = this.createRequestHeader();
-    // return this.http.post<Survey>(url, survey, { headers: httpHeader });
-    return this.http.post<Survey>(url, survey);
+    return this.http.post<Survey>(url, survey, { headers: httpHeader });
+    // return this.http.post<Survey>(url, survey);
   }
 
   deleteSurvey(surveyId: string): Observable<any> {
     const url = this.baseUrl + '/api/v1/surveys/delete/' + surveyId;
     const httpHeader: HttpHeaders = this.createRequestHeader();
-    // return this.http.delete(url, { headers: httpHeader });
-    return this.http.delete(url);
+    return this.http.delete(url, { headers: httpHeader });
+    // return this.http.delete(url);
   }
 
   addSurveyResponse(response: SurveyResponse): Observable<any> {

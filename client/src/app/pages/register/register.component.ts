@@ -62,11 +62,11 @@ export class RegisterComponent implements OnInit {
 
     this.repository.registerUser(registerUser).subscribe(
       (data: any) => {
-        alert('Survey added!');
+        alert('Registered!');
       },
       (err: any) => {
         console.log(err);
-        const msg = err.error.msg || 'Failed to add survey';
+        const msg = err.error.msg || 'Failed to register!';
         alert(msg);
       }
     );

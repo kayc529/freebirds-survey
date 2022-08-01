@@ -63,6 +63,7 @@ export class RegisterComponent implements OnInit {
     this.repository.registerUser(registerUser).subscribe(
       (data: any) => {
         alert('Registered!');
+        location.href='/login'
       },
       (err: any) => {
         console.log(err);

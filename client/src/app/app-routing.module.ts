@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
 import { DummyLoginComponent } from './pages/dummy-login/dummy-login.component';
+import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
 import { AddSurveyComponent } from './survey/add-survey/add-survey.component';
@@ -40,7 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: DummyLoginComponent,
+    component: LoginComponent,
   },
   {
     path: 'register',

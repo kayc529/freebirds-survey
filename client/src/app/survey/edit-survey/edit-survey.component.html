@@ -1,47 +1,38 @@
-
-<div class="margin container">
-    <div class="row justify-content-md-center">
-        <div class="col-md-auto"><br>
-            <h1 class="text-center">{{title}}</h1><br>
-            <div class="box">
-            <!-- Survey Title -->
-            <div class="row">
-                <label for="title" class="boxPadding col-2">Title</label>
-                <input type="text" id='title'value='{{survey?.title}}' style="border-radius: 5px" class="col-8"/>
-            </div>
-            <br>
-            <!-- Survey Description -->
-            <div class="row">
-                <label for="description" class="boxPadding col-2">Description</label>
-                <input type="description" id='description' value='{{survey?.description}}' style="border-radius: 5px" class="col-8"/>
-            </div>
-            <br>
-            <!-- loop to show questions -->
-        
-            <div *ngFor="let q of survey?.questions" class="row">
-                <label for="description" class="boxPadding col-2">Question</label>
-                <input type="text" class='question col' value='{{q.question}}' style="border-radius: 5px"/>
-                <label class="boxPadding">&nbsp;&nbsp;&nbsp;Question Type</label>
-                <!-- Change the default selected according to the data in DB -->
-                <select class="type">
-                    <option value="TEXT" *ngIf="q.questionType === 'TEXT'; else notText" selected>Text</option>
-                    <ng-template #notText><option value="TEXT">Text</option></ng-template>
-                    <option value="T_F" *ngIf="q.questionType === 'T_F'; else notTF" selected>True or False</option>
-                    <ng-template #notTF><option value="T_F">True or False</option></ng-template>
-                    <option value="OPTIONS" *ngIf="q.questionType === 'OPTIONS'; else notOption" selected>Options</option>
-                    <ng-template #notOption><option value="OPTIONS">Options</option></ng-template>
-                    <option value="CHECKBOX" *ngIf="q.questionType === 'CHECKBOX'; else notTF" selected>Checkboxes</option>
-                    <ng-template #notTF><option value="CHECKBOX">Checkboxes</option></ng-template>
-                </select>
-            </div>
-            </div>
-                <!-- Buttons -->
-            <div style="text-align: center;">
-    <button class="btn btn-dark btn-sm" id="add-question-btn" (click)="addQuestion()" style="margin: 20px">Add a question</button>
-    <button class="btn btn-dark btn-sm" id="add-question-btn" (click)="updateSurvey()" style="margin: 20px">Update</button>
-    <a class="btn btn-secondary btn-sm" style="margin: 20px" href="/surveys">Back</a>
-</div>
-<br><br><br><br><br>
-</div>
-</div>
+<div class="container">
+    <form id="new-survey-form">
+        <h1>{{title}}</h1>
+        <!-- Survey Title -->
+        <div>
+            <label for="title">Title</label>
+            <input type="text" id='title'value='{{survey?.title}}'/>
+        </div>
+        <!-- Survey Description -->
+        <div>
+            <label for="description">Description</label>
+            <input type="description" id='description' value='{{survey?.description}}'/>
+        </div>
+        <!-- loop to show questions -->
+    
+        <div *ngFor="let q of survey?.questions">
+            <label for="description">Question</label>
+            <input type="text" class='question' value='{{q.question}}'/>
+            <label>Question Type</label>
+            <!-- Change the default selected according to the data in DB -->
+            <select class="type">
+                <option value="TEXT" *ngIf="q.questionType === 'TEXT'; else notText" selected>Text</option>
+                <ng-template #notText><option value="TEXT">Text</option></ng-template>
+                <option value="T_F" *ngIf="q.questionType === 'T_F'; else notTF" selected>True or False</option>
+                <ng-template #notTF><option value="T_F">True or False</option></ng-template>
+                <option value="OPTIONS" *ngIf="q.questionType === 'OPTIONS'; else notOption" selected>Options</option>
+                <ng-template #notOption><option value="OPTIONS">Options</option></ng-template>
+                <option value="CHECKBOX" *ngIf="q.questionType === 'CHECKBOX'; else notTF" selected>Checkboxes</option>
+                <ng-template #notTF><option value="CHECKBOX">Checkboxes</option></ng-template>
+            </select>
+        </div>
+    
+    </form>
+    <!-- Buttons -->
+    <button (click)="addQuestion()">Add a question</button>
+    <button (click)="updateSurvey()">Update</button>
+    <button (click)="back()">Back</button>
 </div>

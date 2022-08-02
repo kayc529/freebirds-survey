@@ -12,9 +12,9 @@
     </tr>
     <!-- loop through each survey -->
         <tr *ngFor='let survey of surveys'>
-            <td><a href="/surveys/do-survey/{{survey._id}}">
+            <td>
                 {{survey.title}}
-            </a></td>
+            </td>
             <td>
                 {{survey.description}}
             </td>

@@ -1,0 +1,10 @@
+
+.boxPadding {
+    padding:1px 15px 0px 0px
+}
+
+.box{
+    background-color: #E8ECEF;
+    padding:50px;
+    border-radius: 5px;
+}

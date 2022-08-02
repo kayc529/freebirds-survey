@@ -10,6 +10,8 @@ import { DoSurveyComponent } from './survey/do-survey/do-survey.component';
 import { EditSurveyComponent } from './survey/edit-survey/edit-survey.component';
 import { SurveyListComponent } from './survey/survey-list/survey-list.component';
 import { SurveyResultsComponent } from './survey/survey-results/survey-results.component';
+import { SurveyManagementComponent } from './survey/survey-management/survey-management.component';
+
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },
@@ -18,6 +20,11 @@ const routes: Routes = [
     path: 'surveys',
     component: SurveyListComponent,
     data: { title: 'Surveys' },
+  },
+  {
+    path: 'survey-management',
+    component: SurveyManagementComponent,
+    data: { title: 'Survey Management' },
   },
   {
     path: 'surveys/add',

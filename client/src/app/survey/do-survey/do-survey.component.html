@@ -1,7 +1,11 @@
-<div class="container">
+<div class="margin container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-auto"><br>
     <form id="new-survey-form">
+        <div class="box">
         <!-- Survey Title -->
-        <h2>{{survey?.title}}</h2>
+        <h2 class="title">{{survey?.title}}</h2>
+        <br>
         <!-- Survey Description -->
         <h3>{{survey?.description}}</h3>
         <!-- Loop survey questions and show the corresponding question type -->
@@ -41,7 +45,11 @@
             </div>
             <br>
         </div>
+    </div>
     </form>
+    <br>
     <!-- Buttons -->
-    <button id="add-question-btn" (click)="submitSurveyResponse()">Submit</button>
+    <button id="add-question-btn" (click)="submitSurveyResponse()" class="btn btn-secondary btn-sm" style="float:right;">Submit</button>
+</div>
+</div>
 </div>

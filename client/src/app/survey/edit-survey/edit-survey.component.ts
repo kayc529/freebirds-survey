@@ -142,6 +142,6 @@ export class EditSurveyComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/survey-management');
+    window.location.href = '/survey-management';
   }
 }

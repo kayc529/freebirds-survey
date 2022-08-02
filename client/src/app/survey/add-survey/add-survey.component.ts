@@ -124,6 +124,6 @@ export class AddSurveyComponent implements OnInit {
   }
 
   back() {
-    this.router.navigateByUrl('/survey-management');
+    window.location.href = '/survey-management';
   }
 }

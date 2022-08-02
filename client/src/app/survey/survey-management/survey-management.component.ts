@@ -7,13 +7,17 @@ import { SurveyRepository } from 'src/app/models/survey.repository';
 @Component({
   selector: 'app-survey-management',
   templateUrl: './survey-management.component.html',
-  styleUrls: ['./survey-management.component.css']
+  styleUrls: ['./survey-management.component.css'],
 })
 export class SurveyManagementComponent implements OnInit {
   constructor(private repository: SurveyRepository, private router: Router) {}
 
   ngOnInit(): void {
-    console.log('really');
+    //redirect user back to home page if not logged in
+    if (!localStorage.getItem('access_token')) {
+      this.router.navigateByUrl('/');
+      return;
+    }
 
     this.repository.getSurveys();
   }

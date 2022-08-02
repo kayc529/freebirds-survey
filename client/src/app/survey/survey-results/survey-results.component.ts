@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Survey } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
 import { SurveyResponse } from 'src/app/models/surveyResponse.model';
@@ -15,7 +15,8 @@ export class SurveyResultsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private repository: SurveyRepository
+    private repository: SurveyRepository,
+    private router: Router
   ) {
     this.title = this.route.snapshot.data['title'];
     //get surveyId from URL
@@ -36,5 +37,11 @@ export class SurveyResultsComponent implements OnInit {
     return this.repository.getResponses(this.surveyId);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    //redirect user back to home page if not logged in
+    if (!localStorage.getItem('access_token')) {
+      this.router.navigateByUrl('/');
+      return;
+    }
+  }
 }

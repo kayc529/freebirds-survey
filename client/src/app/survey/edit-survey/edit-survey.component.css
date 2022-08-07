@@ -1,9 +1,33 @@
-.boxPadding {
-    padding:1px 15px 0px 0px
-}
 
 .box{
     background-color: #E8ECEF;
     padding:50px;
     border-radius: 5px;
+    padding:20px 15px 50px 20px;
+
+}
+
+.button{
+    margin: 20px;
+}
+
+.btnBox{
+    text-align: center;
+}
+
+.Qbox{
+
+}
+
+.titleBox{
+
+}
+
+.test{
+    color: red;
+    size: 50px;
+}
+
+.gap{
+    margin-bottom: 1rem;
 }

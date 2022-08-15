@@ -10,3 +10,25 @@
 .btn{
     margin: 15px;
 }
+
+.darkBig {
+    color: #17294D;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.darkSmall {
+    color: #17294D;
+    font-size: 2em;
+}
+
+.light {
+    color: #4B5EA2; 
+    font-size: 2em;
+}
+
+.lightBold {
+    color: #4B5EA2; 
+    font-size: 2em; 
+    font-weight: bold
+}

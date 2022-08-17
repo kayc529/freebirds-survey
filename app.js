@@ -67,11 +67,11 @@ app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 // app.use('/api/v1', indexRouter);
 app.use('/api/v1/surveys', surveyRouter);
 app.use('/api/v1/users', userRouter);
-app.get('/*', function (req, res) {
-  res.sendFile(
-    path.join(__dirname + '/client/dist/freebirds-survey/index.html')
-  );
-});
+// app.get('/*', function (req, res) {
+//   res.sendFile(
+//     path.join(__dirname + '/client/dist/freebirds-survey/index.html')
+//   );
+// });
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

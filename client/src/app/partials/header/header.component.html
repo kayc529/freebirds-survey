@@ -13,15 +13,15 @@
                 <a class="nav-link" href="/about"><i class="fas fa-info-circle"></i> About </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/surveys"><i class="fab fa-elementor"></i> Surveys </a>
+                <a class="nav-link" href="/surveys"><i class="fa-solid fa-square-poll-vertical"></i> Surveys </a>
             </li>
             <li class="nav-item">
                 <a *ngIf='accessToken' class="nav-link" href="/survey-management"><i class="fab fa-elementor"></i> Survey Management </a>
             </li>
             <li class="nav-item">
-                <a *ngIf='!accessToken; else logoutBlock' class="nav-link" href="/login"><i class="fab fa-elementor"></i> Login </a>
+                <a *ngIf='!accessToken; else logoutBlock' class="nav-link" href="/login"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login </a>
                 <ng-template #logoutBlock>
-                    <a class="nav-link" (click)="logout()"><i class="fab fa-elementor"></i> Logout </a>
+                    <a class="nav-link" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Logout </a>
                 </ng-template>
             </li>
         </ul>

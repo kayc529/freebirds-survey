@@ -38,8 +38,6 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, '/node_modules')));
-//get resources from frontend build folder
-app.use(express.static(__dirname + '/client/dist/freebirds-survey'));
 
 //setup express session
 // app.use(

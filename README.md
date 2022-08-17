@@ -4,18 +4,18 @@ After you clone the project to your computer, ensure all packages are installed 
 
 server: `npm install`
 
-client: `cd client && npm install`
+Start the server `npm start` or `npm run dev`
 
-**You have two options to run the project:**
-#### 1) Seperate frontend and backend servers
-With this option, you can see immediate changes made in the frontend
-1. Start the backend server `npm start`
-2. Start the frontend server `cd client && ng serve --open`
+~~**You have two options to run the project:**~~
+~~#### 1) Seperate frontend and backend servers~~
+~~With this option, you can see immediate changes made in the frontend~~
+~~1. Start the backend server `npm start`~~
+~~2. Start the frontend server `cd client && ng serve --open`~~
 
-#### 2) Using backend server only
-With this option, you only have to start the backend server, but you must build the frontend app again to see changes
-1. Build the frontend app: `cd client && ng build`
-2. Start the backend server: `cd .. && npm start`
+~~#### 2) Using backend server only~~
+~~With this option, you only have to start the backend server, but you must build the frontend app again to see changes~~
+~~1. Build the frontend app: `cd client && ng build`~~
+~~2. Start the backend server: `cd .. && npm start`~~
   
 ## Basic Git Commands
 

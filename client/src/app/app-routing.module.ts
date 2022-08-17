@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './pages/about/about.component';
-import { DummyLoginComponent } from './pages/dummy-login/dummy-login.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -11,7 +10,6 @@ import { EditSurveyComponent } from './survey/edit-survey/edit-survey.component'
 import { SurveyListComponent } from './survey/survey-list/survey-list.component';
 import { SurveyResultsComponent } from './survey/survey-results/survey-results.component';
 import { SurveyManagementComponent } from './survey/survey-management/survey-management.component';
-
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, data: { title: 'Home' } },

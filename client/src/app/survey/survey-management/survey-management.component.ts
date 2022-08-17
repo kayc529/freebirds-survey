@@ -10,6 +10,9 @@ import { SurveyRepository } from 'src/app/models/survey.repository';
   styleUrls: ['./survey-management.component.css'],
 })
 export class SurveyManagementComponent implements OnInit {
+  userId: string | null = localStorage.getItem('user_id');
+  userRole: string | null = localStorage.getItem('user_role');
+
   constructor(private repository: SurveyRepository, private router: Router) {}
 
   ngOnInit(): void {
@@ -19,6 +22,8 @@ export class SurveyManagementComponent implements OnInit {
       return;
     }
 
+    this.userId = localStorage.getItem('user_id');
+    this.userRole = localStorage.getItem('user_role');
     this.repository.getSurveys();
   }
 

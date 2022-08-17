@@ -22,10 +22,16 @@
                 <a href="/surveys/results/{{survey._id}}" class="btn btn-outline-dark btn-sm" role="button">Results</a>
             </td>
             <td>
-                <a href="/surveys/edit/{{survey._id}}" class="btn btn-outline-dark btn-sm" role="button">Update</a>
+                <div *ngIf="userId==survey.createdBy || userRole==='admin'; else hideUpdate">
+                    <a href="/surveys/edit/{{survey._id}}" class="btn btn-outline-dark btn-sm" role="button">Update</a>
+                </div>
+                <ng-template #hideUpdate><div class="blank-space"></div></ng-template>
             </td>
             <td>
-                <button (click)="deleteSurvey(survey._id)" class="btn btn-outline-danger btn-sm">Delete</button>
+                <div *ngIf="userId==survey.createdBy || userRole==='admin'; else hideDelete">
+                    <button (click)="deleteSurvey(survey._id)" class="btn btn-outline-danger btn-sm">Delete</button>
+                </div>
+                <ng-template #hideDelete><div class="blank-space"></div></ng-template>
             </td>
         </tr>
 </table>

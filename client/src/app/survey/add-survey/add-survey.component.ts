@@ -109,7 +109,12 @@ export class AddSurveyComponent implements OnInit {
       };
     }
 
-    const surveyToAdd: Survey = { _id: '', title, description, questions };
+    const surveyToAdd: Survey = {
+      _id: '',
+      title,
+      description,
+      questions,
+    };
 
     this.repository.addSurvey(surveyToAdd).subscribe(
       (data: any) => {

@@ -28,6 +28,10 @@ const surveySchema = new mongoose.Schema({
     type: [questionSchema],
     required: true,
   },
+  createdBy: {
+    type: mongoose.Types.ObjectId,
+    ref: 'User',
+  },
 });
 
 module.exports = mongoose.model('Survey', surveySchema);

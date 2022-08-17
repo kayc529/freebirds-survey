@@ -18,7 +18,7 @@ const requireAuth = (req, res, next) => {
   }
 
   console.log('auth passed!');
-  req.user = user;
+  req.user = user.user;
   next();
 };
 

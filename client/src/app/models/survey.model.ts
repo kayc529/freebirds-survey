@@ -3,7 +3,8 @@ export class Survey {
     public _id: string,
     public title?: string,
     public questions?: SurveyQuestion[],
-    public description?: string
+    public description?: string,
+    public createdBy?: string
   ) {}
 }
 

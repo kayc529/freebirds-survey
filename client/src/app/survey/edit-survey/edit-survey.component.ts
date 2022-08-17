@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Survey, SurveyQuestion } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
+import { ViewEncapsulation  } from '@angular/core';
 
 @Component({
   selector: 'app-edit-survey',
   templateUrl: './edit-survey.component.html',
   styleUrls: ['./edit-survey.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EditSurveyComponent implements OnInit {
   title: string;

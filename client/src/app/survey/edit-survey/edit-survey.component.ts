@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Survey, SurveyQuestion } from 'src/app/models/survey.model';
 import { SurveyRepository } from 'src/app/models/survey.repository';
-import { ViewEncapsulation  } from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-edit-survey',
@@ -44,17 +44,24 @@ export class EditSurveyComponent implements OnInit {
     let newSurveyForm = document.getElementById('new-survey-form');
     //create a div container
     let questionContainer = document.createElement('div');
+    questionContainer.classList.add('row');
+    questionContainer.classList.add('text-right');
+    questionContainer.style.marginBottom = '1rem';
 
     //create labels
     let questionLabel = document.createElement('label');
     let typeLabel = document.createElement('label');
+    questionLabel.classList.add('col-3');
     questionLabel.innerHTML = 'Question';
+    typeLabel.classList.add('col-2');
     typeLabel.innerHTML = 'Question Type';
 
     //create quesiont input field
     let questionInput = document.createElement('input');
     questionInput.type = 'text';
     questionInput.classList.add('question');
+    questionInput.classList.add('col-4');
+    questionInput.classList.add('Qbox');
 
     //create select and options
     let typeSelect = document.createElement('select');

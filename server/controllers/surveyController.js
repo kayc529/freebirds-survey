@@ -19,10 +19,13 @@ const displayAddSurvey = (req, res, next) => {
 const processAddSurvey = (req, res, next) => {
   const { title, description, questions } = req.body;
 
+  console.log('user', req.user);
+
   let newSurvey = Survey({
     title: title,
     description: description,
     questions: questions,
+    createdBy: req.user.id,
   });
 
   Survey.create(newSurvey, (err, Book) => {

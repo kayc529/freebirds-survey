@@ -19,11 +19,15 @@ export class HeaderComponent implements OnInit {
     this.repository.logoutUser().subscribe(
       (data) => {
         localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('user_role');
         window.location.href = window.location.origin + '/home';
       },
       (err) => {
         console.log(err);
         localStorage.removeItem('access_token');
+        localStorage.removeItem('user_id');
+        localStorage.removeItem('user_role');
         window.location.href = window.location.origin + '/home';
       }
     );

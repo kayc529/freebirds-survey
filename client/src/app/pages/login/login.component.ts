@@ -3,18 +3,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
 import { UserRepository } from 'src/app/models/user.repository';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private repository: UserRepository,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     //if the user already logged in
@@ -43,6 +42,8 @@ export class LoginComponent implements OnInit {
         console.log(data);
         if (data.success) {
           localStorage.setItem('access_token', data.accessToken);
+          localStorage.setItem('user_role', data.user?.role);
+          localStorage.setItem('user_id', data.user?.id);
           window.location.href = window.location.origin + '/home';
         } else {
           alert(data.msg);

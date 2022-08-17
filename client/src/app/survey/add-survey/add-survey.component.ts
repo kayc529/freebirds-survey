@@ -31,11 +31,16 @@ export class AddSurveyComponent implements OnInit {
     let newSurveyForm = document.getElementById('new-survey-form');
     //create a div container
     let questionContainer = document.createElement('div');
+    questionContainer.classList.add('row');
+    questionContainer.classList.add('text-right');
+    questionContainer.style.marginBottom = '12px';
 
     //create labels
     let questionLabel = document.createElement('label');
     let typeLabel = document.createElement('label');
+    questionLabel.classList.add('col-3');
     questionLabel.innerHTML = 'Question';
+    typeLabel.classList.add('col-2');
     typeLabel.innerHTML = 'Question Type';
 
     //create quesiont input field
@@ -109,7 +114,12 @@ export class AddSurveyComponent implements OnInit {
       };
     }
 
-    const surveyToAdd: Survey = { _id: '', title, description, questions };
+    const surveyToAdd: Survey = {
+      _id: '',
+      title,
+      description,
+      questions,
+    };
 
     this.repository.addSurvey(surveyToAdd).subscribe(
       (data: any) => {
